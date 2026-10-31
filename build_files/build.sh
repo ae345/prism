@@ -90,3 +90,6 @@ glib-compile-schemas /usr/share/glib-2.0/schemas
 ### OS名
 # ID は変えない（Bazzite の更新ツールが参照するため）。表示名だけ変える
 sed -i "s/^PRETTY_NAME=.*/PRETTY_NAME=\"${OS_NAME} (based on Bazzite)\"/" /usr/lib/os-release
+
+### 後片付け（bootc の検査で「/run に中身がある」と警告されるため）
+rm -rf /run/dnf
