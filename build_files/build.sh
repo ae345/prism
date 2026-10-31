@@ -6,20 +6,17 @@ OS_NAME="Prism"
 
 ### パッケージ
 # アシスタントの実行に必要なもの（GTK4 / libadwaita）と、
-# Apple 風の見た目に使う GNOME 拡張・フォント・テーマのビルド用ツール
+# Apple 風の見た目に使う GNOME 拡張・フォント
 dnf5 install -y --skip-unavailable \
     python3-gobject \
     gtk4 \
     libadwaita \
     pciutils \
     git \
-    sassc \
-    glib2-devel \
     rsms-inter-fonts \
     google-noto-sans-cjk-fonts \
     gnome-shell-extension-dash-to-dock \
     gnome-shell-extension-blur-my-shell \
-    gnome-shell-extension-user-theme \
     gnome-shell-extension-appindicator
 
 ### Prism シェル（Hyprland + Quickshell）
@@ -60,18 +57,17 @@ python3 -m venv --system-site-packages /usr/lib/myos/venv
 /usr/lib/myos/venv/bin/pip install --no-cache-dir "mcp>=2,<3"
 chmod +x /usr/bin/myos-assistant /usr/bin/myos-claude-code /usr/libexec/myos-firstrun
 
-### Apple 風のテーマ（WhiteSur：オープンソースのテーマ一式）
-# ウィンドウ（GTK3）とトップバーのテーマ。信号機の色のウィンドウボタン、すりガラス風のパネル
-git clone --depth=1 https://github.com/vinceliuice/WhiteSur-gtk-theme.git /tmp/whitesur-gtk
-/tmp/whitesur-gtk/install.sh -d /usr/share/themes -c light -c dark -o normal
+### Apple 風のアイコンとカーソル（WhiteSur：オープンソースのテーマ一式）
+# Prism のアイコンにないアプリは、このアイコンを使う。
+# 見た目だけの部品なので、取得に失敗してもイメージのビルドは止めない。
+# （WhiteSur の GTK テーマは、インストーラーがビルド環境の中で動かないため使っていない）
+if git clone --depth=1 https://github.com/vinceliuice/WhiteSur-icon-theme.git /tmp/whitesur-icons; then
+    /tmp/whitesur-icons/install.sh -d /usr/share/icons || echo "警告: WhiteSur アイコンを入れられませんでした" >&2
+fi
 
-# アイコン
-git clone --depth=1 https://github.com/vinceliuice/WhiteSur-icon-theme.git /tmp/whitesur-icons
-/tmp/whitesur-icons/install.sh -d /usr/share/icons
-
-# マウスカーソル
-git clone --depth=1 https://github.com/vinceliuice/WhiteSur-cursors.git /tmp/whitesur-cursors
-cp -r /tmp/whitesur-cursors/dist /usr/share/icons/WhiteSur-cursors
+if git clone --depth=1 https://github.com/vinceliuice/WhiteSur-cursors.git /tmp/whitesur-cursors; then
+    cp -r /tmp/whitesur-cursors/dist /usr/share/icons/WhiteSur-cursors || echo "警告: WhiteSur カーソルを入れられませんでした" >&2
+fi
 
 # Prism 独自のアプリアイコン（tools/make_icons.py で作ったもの）。足りないものは WhiteSur を使う
 cp /usr/share/icons/Prism/scalable/apps/myos-assistant.svg \

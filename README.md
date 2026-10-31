@@ -5,7 +5,7 @@ Claude を組み込んだ、Apple 風の見た目の自作OSです。
 
 - **ゲーム**：Steam と Proton で Windows のゲームが動きます（Bazzite の機能をそのまま使います）
 - **Claude**：`Super + C` でアシスタントを呼び出せます。質問への回答のほか、アプリを開く、ダークモードに切り替える、PCの状態を調べるといった操作もできます。コマンドを実行するときは、必ず確認ダイアログが出ます
-- **見た目**：Apple 風のテーマ（[WhiteSur](https://github.com/vinceliuice/WhiteSur-gtk-theme)）。左上の信号機ボタン、すりガラス風のトップバーと Dock、丸みのあるアイコンとカーソル、オリジナルのグラデーション壁紙（ライト／ダーク）。アシスタントはメッセージアプリ風の青い吹き出し
+- **見た目**：タブレット風の Prism シェル（ソフトガラスのウィジェットと Dock、Hyper Island 風の通知、コントロールセンター）。独自のアイコン・壁紙・効果音。足りないアイコンとカーソルは [WhiteSur](https://github.com/vinceliuice/WhiteSur-icon-theme) を使う
 - **安全性**：システムは読み取り専用です。更新は Fedora / Bazzite から自動で届き、不具合が出たら前のバージョンに戻せます
 
 
