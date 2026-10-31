@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+# アシスタントを起動する。すでに起動していれば、そのウィンドウを前に出す
+exec /usr/lib/myos/venv/bin/python3 /usr/lib/myos/assistant/main.py "$@"

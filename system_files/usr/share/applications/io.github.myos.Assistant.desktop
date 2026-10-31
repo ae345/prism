@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Assistant
+Name[ja]=アシスタント
+Comment=Ask Claude or let it operate your PC
+Comment[ja]=Claude に質問したり、PCの操作を頼んだりできます
+Exec=myos-assistant
+Icon=io.github.myos.Assistant
+Terminal=false
+Categories=Utility;
+Keywords=claude;ai;assistant;chat;
+StartupNotify=true
+DBusActivatable=false

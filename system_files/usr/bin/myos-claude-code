@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+# ターミナルで Claude Code を開く。まだ入っていなければ先にインストールする。
+# `myos-claude-code login` とすると、Pro / Max プランのアカウントでログインする。
+# （Claude Code は自動更新されるので、イメージには含めずユーザーのホームに入れる）
+CLAUDE="$HOME/.local/bin/claude"
+
+if [ "${1:-}" = "login" ]; then
+    run="$CLAUDE auth login && echo && echo 'ログインできました。このウィンドウは閉じてかまいません。'"
+else
+    run="$CLAUDE"
+fi
+
+if [ -x "$CLAUDE" ]; then
+    cmd="$run"
+else
+    cmd="ujust install-claude-code && $run"
+fi
+
+exec ptyxis --new-window -x "bash -lc \"$cmd; exec bash\""

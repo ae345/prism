@@ -1,0 +1,12 @@
+[Icon Theme]
+Name=Prism
+Comment=Prism app icons (others come from WhiteSur)
+Inherits=WhiteSur,hicolor
+Directories=scalable/apps
+
+[scalable/apps]
+Size=128
+MinSize=16
+MaxSize=512
+Type=Scalable
+Context=Applications

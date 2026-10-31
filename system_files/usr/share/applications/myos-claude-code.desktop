@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Claude Code
+Comment=Claude in the terminal
+Comment[ja]=ターミナルで Claude を使う
+Exec=myos-claude-code
+Icon=myos-claude-code
+Terminal=false
+Categories=Development;
+Keywords=claude;ai;terminal;code;

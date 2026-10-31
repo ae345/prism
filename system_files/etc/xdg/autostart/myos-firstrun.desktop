@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Prism first-run setup
+Exec=/usr/libexec/myos-firstrun
+NoDisplay=true
+OnlyShowIn=GNOME;
+X-GNOME-Autostart-Phase=Applications

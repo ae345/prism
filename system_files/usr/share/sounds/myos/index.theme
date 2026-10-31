@@ -1,0 +1,8 @@
+[Sound Theme]
+Name=Prism
+Comment=Prism system sounds
+Inherits=freedesktop
+Directories=stereo
+
+[stereo]
+OutputProfile=stereo

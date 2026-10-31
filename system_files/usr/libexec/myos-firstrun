@@ -1,0 +1,29 @@
+#!/usr/bin/bash
+# ログイン時に毎回呼ばれる。初回だけ、ユーザーごとの設定（ショートカットキー）を入れる。
+# 独自パスのキー割り当ては gschema の上書きでは設定できないため、ここで行う。
+set -euo pipefail
+
+STAMP="${XDG_STATE_HOME:-$HOME/.local/state}/myos/firstrun-v1"
+[ -e "$STAMP" ] && exit 0
+
+# Super + C でアシスタントを呼び出す
+SCHEMA=org.gnome.settings-daemon.plugins.media-keys
+KB_PATH=/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/myos-assistant/
+
+current=$(gsettings get "$SCHEMA" custom-keybindings)
+if [[ "$current" != *"myos-assistant"* ]]; then
+    if [[ "$current" == "@as []" || "$current" == "[]" ]]; then
+        updated="['$KB_PATH']"
+    else
+        updated="${current%]}, '$KB_PATH']"
+    fi
+    gsettings set "$SCHEMA" custom-keybindings "$updated"
+fi
+
+KB="$SCHEMA.custom-keybinding:$KB_PATH"
+gsettings set "$KB" name 'Assistant'
+gsettings set "$KB" command 'myos-assistant'
+gsettings set "$KB" binding '<Super>c'
+
+mkdir -p "$(dirname "$STAMP")"
+touch "$STAMP"

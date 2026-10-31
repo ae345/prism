@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Prism
+Comment=Prism のタブレット風デスクトップ（Hyprland + Quickshell）
+Exec=start-hyprland -- --config /usr/share/myos/hypr/hyprland.lua
+Type=Application
+DesktopNames=Hyprland;Prism

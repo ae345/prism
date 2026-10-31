@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+# スクリーンショットを撮って「ピクチャ/スクリーンショット」に保存し、クリップボードにも入れる。
+# 引数に area を付けると、範囲を選んで撮る。
+set -euo pipefail
+
+DIR="$(xdg-user-dir PICTURES 2>/dev/null || echo "$HOME/Pictures")/スクリーンショット"
+mkdir -p "$DIR"
+FILE="$DIR/$(date +%Y-%m-%d_%H-%M-%S).png"
+
+if [ "${1:-}" = "area" ]; then
+    grim -g "$(slurp)" "$FILE"
+else
+    grim "$FILE"
+fi
+
+wl-copy < "$FILE"
+pw-play /usr/share/sounds/myos/stereo/screen-capture.wav &

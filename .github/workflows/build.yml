@@ -1,0 +1,43 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # 毎日 3:00（日本時間）に作り直し、Bazzite / Fedora の更新を取り込む
+  schedule:
+    - cron: "0 18 * * *"
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: prism
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      # Bazzite のイメージは大きいので、ランナーの不要なファイルを消して空きを作る
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          df -h /
+
+      - name: Build image
+        run: podman build --pull=newer -t "$IMAGE_NAME:latest" -f Containerfile .
+
+      - name: Push to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        env:
+          REGISTRY_USER: ${{ github.actor }}
+          REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # ghcr.io のパスは小文字でなければならない
+          REGISTRY="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}"
+          echo "$REGISTRY_PASSWORD" | podman login ghcr.io -u "$REGISTRY_USER" --password-stdin
+          podman push "$IMAGE_NAME:latest" "$REGISTRY/$IMAGE_NAME:latest"
+          podman push "$IMAGE_NAME:latest" "$REGISTRY/$IMAGE_NAME:$(date -u +%Y%m%d)"

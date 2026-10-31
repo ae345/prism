@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b2f9e"/>
+      <stop offset="0.5" stop-color="#5a2b9c"/>
+      <stop offset="1" stop-color="#1a1660"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="80"/></filter>
+    <filter id="silk" x="-10%" y="-30%" width="120%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
+    <filter id="edge" x="-10%" y="-30%" width="120%" height="160%"><feGaussianBlur stdDeviation="1.6"/></filter>
+    <linearGradient id="ribbonWarm" x1="0" y1="0" x2="1" y2="0.2">
+      <stop offset="0" stop-color="#ffb066"/>
+      <stop offset="0.45" stop-color="#ff5e8a"/>
+      <stop offset="1" stop-color="#b65cff"/>
+    </linearGradient>
+    <linearGradient id="ribbonSun" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffd47a"/>
+      <stop offset="0.5" stop-color="#ff7a5c"/>
+      <stop offset="1" stop-color="#ff4fa3"/>
+    </linearGradient>
+    <linearGradient id="ribbonCool" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8b7bff"/>
+      <stop offset="0.55" stop-color="#4f8bff"/>
+      <stop offset="1" stop-color="#5fe0ff"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.5"/>
+      <stop offset="0.35" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="75%">
+      <stop offset="0.62" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.32"/>
+    </radialGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#base)"/>
+
+  <g filter="url(#soft)">
+    <circle cx="160" cy="860" r="330" fill="#ff8a4c" opacity="0.95"/>
+    <circle cx="600" cy="420" r="250" fill="#ff3fa4" opacity="0.8"/>
+    <circle cx="1400" cy="120" r="320" fill="#7b5cff"/>
+    <circle cx="1460" cy="820" r="290" fill="#16c8ff" opacity="0.9"/>
+  </g>
+
+  <path d="M-80 250 C 260 120, 540 380, 880 230 S 1380 30, 1700 110 L 1700 -60 L -80 -60 Z" fill="url(#ribbonCool)" opacity="0.7" filter="url(#silk)"/>
+  <path d="M-80 250 C 260 120, 540 380, 880 230 S 1380 30, 1700 110" fill="none" stroke="#fff" stroke-opacity="0.45" stroke-width="2" filter="url(#edge)"/>
+
+  <path d="M-80 690 C 280 520, 600 760, 960 560 S 1460 320, 1700 400 L 1700 980 L -80 980 Z" fill="url(#ribbonWarm)" opacity="0.88" filter="url(#silk)"/>
+  <path d="M-80 690 C 280 520, 600 760, 960 560 S 1460 320, 1700 400 L 1700 980 L -80 980 Z" fill="url(#sheen)"/>
+  <path d="M-80 690 C 280 520, 600 760, 960 560 S 1460 320, 1700 400" fill="none" stroke="#fff" stroke-opacity="0.55" stroke-width="2.2" filter="url(#edge)"/>
+
+  <path d="M-80 810 C 340 640, 720 900, 1080 720 S 1520 540, 1700 610 L 1700 980 L -80 980 Z" fill="url(#ribbonSun)" opacity="0.92" filter="url(#silk)"/>
+  <path d="M-80 810 C 340 640, 720 900, 1080 720 S 1520 540, 1700 610 L 1700 980 L -80 980 Z" fill="url(#sheen)"/>
+  <path d="M-80 810 C 340 640, 720 900, 1080 720 S 1520 540, 1700 610" fill="none" stroke="#fff" stroke-opacity="0.5" stroke-width="2" filter="url(#edge)"/>
+
+  <rect width="1600" height="900" fill="url(#vignette)"/>
+  <rect width="1600" height="900" fill="#000" filter="url(#grain)"/>
+</svg>
